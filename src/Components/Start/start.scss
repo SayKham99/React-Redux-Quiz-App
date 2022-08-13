@@ -1,0 +1,49 @@
+p, h3 {
+  margin: 0;
+}
+
+.wrapper {
+  margin: 0 auto;
+  margin-top: 15%;
+  width: 500px;
+  max-height: 400px;
+  padding: 50px 20px;
+  box-shadow: 0 20px 45px -26px rgba(22, 22, 22, 0.67);
+  border-radius: 10px;
+  font-family: Roboto, sans-serif;
+  text-align: center;
+  color: #4eaaff;
+
+  p {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    font-weight: 300;
+  }
+
+  ul {
+    padding: 0;
+
+    li {
+      padding: 8px 16px;
+      list-style: none;
+      max-width: 80%;
+      margin: 0 auto;
+      border-radius: 10px;
+
+      &:hover {
+        background-color: rgba(128, 128, 128, 0.51);
+        color: white;
+      }
+      &.correct {
+        background-color: rgb(53, 212, 53);
+      }
+      &.selected:not(.correct) {
+        background-color: rgb(206, 58, 58);
+      }
+    }
+
+  }
+}

@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, {useState, useEffect} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
+import './start.scss'
+
 const decodeHTML = function (html) {
   const txt = document.createElement('textarea')
   txt.innerHTML = html
   return txt.value
 }
+
 function Start() {
   const [questions, setQuestions] = useState([])
   const [answerSelected, setAnswerSelected] = useState(false)
@@ -43,8 +46,7 @@ function Start() {
     setSelectedAnswer(event.target.textContent)
     if (event.target.textContent === answer) {
       dispatch({
-        type: 'SET_SCORE',
-        score: score + 1,
+        type: 'SET_SCORE', score: score + 1,
       })
     }
     if (questionIndex + 1 <= questions.length) {
@@ -52,8 +54,7 @@ function Start() {
         setAnswerSelected(false)
         setSelectedAnswer(null)
         dispatch({
-          type: 'SET_INDEX',
-          index: questionIndex + 1,
+          type: 'SET_INDEX', index: questionIndex + 1,
         })
       }, 1000)
     }
@@ -72,21 +73,20 @@ function Start() {
   if (!question) {
     return <div>Loading</div>
   }
-  return (
-      <div>
-        <p>Question {questionIndex + 1}</p>
-        <h3>{question.question}</h3>
-        <ul>
-          {options.map((option, i) => (
-              <li key={i} onClick={handleListItemClick} className={getClass(option)}>
-                {option}
-              </li>
-          ))}
-        </ul>
-        <div>
-          Score: {score} / {questions.length}
-        </div>
-      </div>
-  )
+
+  console.log(questions)
+  return (<div className='wrapper'>
+    <p>Question {questionIndex + 1}</p>
+    <h3>{question.question}</h3>
+    <ul>
+      {options.map((option, i) => (<li key={i} onClick={handleListItemClick} className={getClass(option)}>
+        {option}
+      </li>))}
+    </ul>
+    <div>
+      Score: {score} / {questions.length}
+    </div>
+  </div>)
 }
+
 export default Start
