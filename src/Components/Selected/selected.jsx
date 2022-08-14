@@ -25,7 +25,7 @@ function App() {
   }, [])
 
   //Random Answers
-  data.map(cat => {
+  data.map((cat) => {
     let option = cat.incorrect_answers;
     option.splice(Math.floor(Math.random() * (cat.incorrect_answers.length + 1)), 0, cat.correct_answer)
   })
