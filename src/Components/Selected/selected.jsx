@@ -4,17 +4,14 @@ import './selected.scss'
 import {FormControl, InputLabel, MenuItem, Select, TextField} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 
 function App() {
-  const loading = useSelector(state=>state.options.loading)
-  const questionCategory = useSelector(state=>state.options.question_category)
-  const questionAmount = useSelector(state=>state.options.amount_of_questions)
   const dispatch = useDispatch()
-  const [data, setData] = useState([]);
+  const [data] = useState([]);
   const [category, setCategory] = useState([]);
   const navigate = useNavigate()
-  const {register, handleSubmit, formState: {errors}, reset} = useForm()
+  const {register, handleSubmit, formState: {errors}} = useForm()
 
   //GET categories
   useEffect(() => {

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import './start.scss'
+import {useNavigate} from "react-router-dom";
 
 const decodeHTML = function (html) {
   const txt = document.createElement('textarea')
@@ -15,6 +16,7 @@ function Start() {
   const [options, setOptions] = useState([])
   const score = useSelector((state) => state.score)
   const encodedQuestions = useSelector((state) => state.questions)
+  console.log(questions)
   useEffect(() => {
     const decodedQuestions = encodedQuestions.map(q => {
       return {
@@ -30,6 +32,7 @@ function Start() {
   const dispatch = useDispatch()
   const question = questions[questionIndex]
   const answer = question && question.correct_answer
+  const history = useNavigate()
   const getRandomInt = (max) => {
     return Math.floor(Math.random() * Math.floor(max))
   }
@@ -42,6 +45,7 @@ function Start() {
     setOptions(answers)
   }, [question])
   const handleListItemClick = (event) => {
+    console.log(event.target.innerText)
     setAnswerSelected(true)
     setSelectedAnswer(event.target.textContent)
     if (event.target.textContent === answer) {
@@ -49,14 +53,19 @@ function Start() {
         type: 'SET_SCORE', score: score + 1,
       })
     }
-    if (questionIndex + 1 <= questions.length) {
+    if (questionIndex + 1 < questions.length) {
       setTimeout(() => {
         setAnswerSelected(false)
         setSelectedAnswer(null)
         dispatch({
           type: 'SET_INDEX', index: questionIndex + 1,
         })
-      }, 1000)
+        dispatch({
+          type: 'SET_ANSWER', selected: { select: event.target.innerText}
+        })
+      }, 500)
+    } else {
+      history('/score')
     }
   }
   const getClass = option => {
@@ -74,7 +83,6 @@ function Start() {
     return <div>Loading</div>
   }
 
-  console.log(questions)
   return (<div className='wrapper'>
     <p>Question {questionIndex + 1}</p>
     <h3>{question.question}</h3>

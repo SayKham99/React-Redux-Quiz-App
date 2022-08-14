@@ -3,8 +3,9 @@ const initState = {
     loading: false, question_category: ``, question_difficulty: ``, question_type: ``, amount_of_questions: 50
   },
   questions: [],
-  index:0,
-  score:0
+  index: 0,
+  score: 0,
+  selected:[]
 }
 export const Quizs = (state = initState, action) => {
   switch (action.type) {
@@ -30,6 +31,11 @@ export const Quizs = (state = initState, action) => {
       return {
         ...state,
         questions: action.questions
+      }
+    case "SET_ANSWER":
+      return {
+        ...state,
+        selected: action.selected
       }
     case "SET_INDEX":
       return {
